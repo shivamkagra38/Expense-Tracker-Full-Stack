@@ -7,6 +7,7 @@ const CORS = require("cors");
 const connectDB = require("./MongoDB/db_connect.js");
 const registerUser = require("./Controllers/registerUser.js");
 const loginUser = require("./Controllers/loginUser.js");
+const logoutUser = require("./Controllers/logoutUser.js");
 
 //Injecting environment variables
 dotevn.config({});
@@ -28,4 +29,5 @@ app.use(express.urlencoded({extended:true}));// Middleware for parsing form data
 app.use(CORS());//Middleware for avoiding CORS policy error
 
 app.post("/register", registerUser);
-app.post("/login", loginUser)
+app.post("/login", loginUser);
+app.post("/logout", logoutUser);

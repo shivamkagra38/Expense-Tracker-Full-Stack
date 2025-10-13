@@ -15,7 +15,7 @@ const registerUser = async (req, res) => {
                 success: false
             });
 
-            throw new Error("All fields are required.");
+            return;
         }
 
         //checking if user exists already or not
@@ -28,7 +28,7 @@ const registerUser = async (req, res) => {
                 success: false
             });
             
-            throw new Error("User already exists.");
+            return;
         }
 
         //Encrypting password using bcryptjs module
@@ -49,7 +49,8 @@ const registerUser = async (req, res) => {
     }
     catch(registerError)
     {
-        console.log(registerError);
+        res.status(401).json("Error while registering");
+        console.log("Error while registering");
     }
 
 }
