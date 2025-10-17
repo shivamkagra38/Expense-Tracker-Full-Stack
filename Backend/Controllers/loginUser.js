@@ -12,7 +12,7 @@ const loginUser = async (req, res) => {
         {
             res.status(400).json({
                 message: "All fields are required",
-                status: false
+                success: false
             });
 
             return;
@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
         {
             res.status(401).json({
                 message: "User does not exists",
-                status: false
+                success: false
             });
             
             return;
@@ -36,7 +36,7 @@ const loginUser = async (req, res) => {
         {
             res.status(401).json({
                 message:"Wrong Password",
-                status: false
+                success: false
             });
 
             return;
@@ -44,9 +44,7 @@ const loginUser = async (req, res) => {
 
         const tokenData = {userId: userExists._id}
         const token = await jwt.sign(tokenData, process.env.SECRET_KEY, {expiresIn: "1d"});
-
-        console.log(token);
-
+        
         res.status(200)
         .cookie("token", token, {maxAge:1*24*60*60*1000, httpOnly:true, sameSite:"strict"})
         .json({
@@ -56,7 +54,7 @@ const loginUser = async (req, res) => {
                 fullname: userExists.fullname,
                 email: userExists.email
             },
-            status:true
+            success:true
         });
 
     }
@@ -65,7 +63,7 @@ const loginUser = async (req, res) => {
         console.log(loginError);
         res.status(400).json({
             message:"Error while logging in.",
-            status:false
+            success:false
         });
     }
 

@@ -18,7 +18,7 @@ const expenseSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    userID: {
+    userId: {
         //type: function
         type: mongoose.Schema.Types.ObjectId,
         ref:"User",
