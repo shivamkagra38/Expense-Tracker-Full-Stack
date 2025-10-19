@@ -88,8 +88,7 @@ const markAsDone = async (req, res) => {
         }
 
         res.status(200).json({message: "Status marked successfully", success:true});
-
-        console.log(markAsDone);
+        
     }
     catch(markAsDoneError)
     {
@@ -131,8 +130,6 @@ const updateExpense = async (req, res) => {
         const updatedExpense = {description, amount, category};
 
         const updateExpenseStatus = await expenseModel.findByIdAndUpdate(expenseId, updatedExpense, {new: true});
-
-        console.log(updateExpenseStatus);
 
         if(!updateExpenseStatus)
         {
