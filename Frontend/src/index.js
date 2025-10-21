@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 
+import Home from "../components/Home.js";
+import Login from "../components/Login.js";
+import Signup from "../components/Signup.js";
 
 const mainRoot = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -10,19 +13,29 @@ const routerConfig = createBrowserRouter([
 
     {
         path: "/",
-        element:"Home component to be rendered here.",
+        element: <Home />,
         errorElement: "Invalid route"
     },
     {
         path: "/login",
-        element: "Login component"
+        element: <Login />
     },
     {
         path: "/signup",
-        element: "signup component"
+        element: <Signup />
     }
 
 ]);
 
+const App = () => {
+
+    return (
+        <div>
+            <RouterProvider router={routerConfig} />
+        </div>
+    );
+
+}
+
 //Rendering...
-mainRoot.render(<RouterProvider router={routerConfig} />);
+mainRoot.render(<App />);
