@@ -5,6 +5,7 @@ import { Button } from './ui/button';
 
 import Logo from './Logo.js';
 import { Link } from 'react-router';
+import axios from 'axios';
 
 const Signup = () => {
 
@@ -33,12 +34,17 @@ const Signup = () => {
             }
 
             setMessage("Processing your request...");
+
+            const response = await axios.post("http://localhost:8000/register",userData);
+
+            console.log(response);
+            setMessage("Welcome to the team ✅");
         }
         catch(error)
         {
             console.log(error);
+            setMessage("Opps! Error while signing up");
         }
-
 
     }
 
@@ -46,6 +52,7 @@ const Signup = () => {
     <div className="flex items-center justify-center h-screen">
         <form onSubmit={submitHandler} className="w-96 p-8 shadow-lg">
 
+        
             <div className="flex justify-center">
                 <Logo />
             </div>
@@ -69,8 +76,8 @@ const Signup = () => {
                 <Button className="w-full bg-gradient-to-tr from-lime-400 to-yellow-200 text-lime-950 cursor-pointer hover:scale-105 hover:shadow-lg transition duration-300 ease-in-out">Let's Go!</Button>
                 <Link to="/login"><p className="text-center mt-1.5 text-xs text-blue-700">Already have an account? Login</p></Link>
             </div>
-
-            <div className="mt-5 text-center text-red-700 text-lg">
+            
+            <div className={message === "Welcome to the team ✅" ? "mt-5 text-center text-lime-700 text-sm" : "mt-5 text-center text-red-700"}>
                 <p>{message}</p>
             </div>
         </form>

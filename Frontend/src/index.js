@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import Home from "../components/Home.js";
 import Login from "../components/Login.js";
 import Signup from "../components/Signup.js";
+import { Toaster } from "../components/ui/sonner.js";
 
 const mainRoot = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -31,6 +32,7 @@ const App = () => {
 
     return (
         <div>
+           <Toaster position="top-center" richColors />
             <RouterProvider router={routerConfig} />
         </div>
     );

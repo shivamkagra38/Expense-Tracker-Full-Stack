@@ -5,7 +5,6 @@ const Home = () => {
   return (
     <div>
         Home component
-        <Button>Button</Button>
     </div>
   )
 }
