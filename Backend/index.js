@@ -32,7 +32,7 @@ app.use(cookieParser());
 
 app.post("/register", registerUser);
 app.post("/login", loginUser);
-app.post("/logout", logoutUser);
+app.get("/logout", logoutUser);
 
 app.post("/add-expense", isAuth);
 app.post("/add-expense", expenseControllers.addExpense);
