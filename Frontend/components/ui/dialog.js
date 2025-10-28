@@ -9,6 +9,7 @@ import { cn } from "../../lib/utils.js"
 function Dialog({
   ...props
 }) {
+  //console.log("<Dialog/>");
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
 }
 
