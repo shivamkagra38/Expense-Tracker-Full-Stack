@@ -1,18 +1,29 @@
-import React, {useState} from 'react';
+import React, {use, useState} from 'react';
 import { Button } from "./ui/button.js";
 import Navbar from './Navbar.js';
 import CreateExpense from './CreateExpense.js';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select.js";
 
+import { useDispatch } from 'react-redux';
+import { setSliceCategory, setSliceMarkAsDone } from '../src/redux/expenseSlice.js';
+import ExpenseTable from './ExpenseTable.js';
+import useGetExpenses from '../src/hooks/useGetExpenses.js';
+
 const Home = () => {
 
-  const[category, setCategory] = useState("");
+  const dispatch = useDispatch();
+
+  useGetExpenses();
 
   const categoryHandler = (value) => {
-  
+
+    dispatch(setSliceCategory(value));
+
   }
 
-  const doneHandler = () => {
+  const doneHandler = (value) => {
+
+    dispatch(setSliceMarkAsDone(value));
 
   }
 
@@ -42,7 +53,7 @@ const Home = () => {
           </SelectContent>
         </Select>
 
-        <Select>
+        <Select onValueChange={doneHandler}>
           <SelectTrigger><SelectValue placeholder="Mark As" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="done">Done</SelectItem>
@@ -53,8 +64,9 @@ const Home = () => {
 
         </div>
 
-      </div>
+        <ExpenseTable />
 
+      </div>
     </div>
   )
 }

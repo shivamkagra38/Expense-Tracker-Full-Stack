@@ -7,6 +7,9 @@ import Login from "../components/Login.js";
 import Signup from "../components/Signup.js";
 import { Toaster } from "../components/ui/sonner.js";
 
+import { Provider } from "react-redux";
+import store from "./redux/store.js";
+
 const mainRoot = ReactDOM.createRoot(document.getElementById("root"));
 
 //Routing configguration
@@ -32,8 +35,10 @@ const App = () => {
 
     return (
         <div>
-           <Toaster position="top-center" richColors />
-            <RouterProvider router={routerConfig} />
+            <Provider store={store}>
+                <Toaster position="top-center" richColors />
+                <RouterProvider router={routerConfig} />
+            </Provider>
         </div>
     );
 

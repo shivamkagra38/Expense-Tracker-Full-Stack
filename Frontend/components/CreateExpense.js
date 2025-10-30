@@ -14,9 +14,7 @@ const CreateExpense = (props) => {
     const[formData, setFormData] = useState({description:"", amount:"", category:""});
     const[loading, setLoading] = useState(false);
     const[isOpen, setIsOpen] = useState(false);
-
-    console.log(formData);
-
+    
     const inputHandler = (e) => {
 
         setFormData((previousFormData)=>{

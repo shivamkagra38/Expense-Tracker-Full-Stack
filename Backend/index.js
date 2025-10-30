@@ -27,7 +27,7 @@ app.listen(PORT, () => {
 
 app.use(express.json());//Middleware for json parsing
 app.use(express.urlencoded({extended:true}));// Middleware for parsing form data
-app.use(CORS({credentials: true}));//Middleware for avoiding CORS policy error
+app.use(CORS({origin:"http://localhost:1234",credentials: true}));//Middleware for avoiding CORS policy error
 app.use(cookieParser());
 
 app.post("/register", registerUser);
