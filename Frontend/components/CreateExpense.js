@@ -7,6 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import axios from 'axios';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setExpenses } from "../src/redux/expenseSlice.js";
 
 const CreateExpense = (props) => {
 
@@ -14,7 +16,9 @@ const CreateExpense = (props) => {
     const[formData, setFormData] = useState({description:"", amount:"", category:""});
     const[loading, setLoading] = useState(false);
     const[isOpen, setIsOpen] = useState(false);
-    
+    const dispatch = useDispatch();
+    const{expenses} = useSelector((store)=>{return store.expense});
+
     const inputHandler = (e) => {
 
         setFormData((previousFormData)=>{
@@ -41,11 +45,11 @@ const CreateExpense = (props) => {
         try
         {
             const response = await axios.post("http://localhost:8000/add-expense",formData,{withCredentials: true});
-            console.log(response);
-
+    
             if(response.data.success)
             {
                 toast.success("Expense added !");
+                dispatch(setExpenses([...expenses,response.data.expense]));
                 setIsOpen(false);
                 setFormData({description:"", amount:"", category:""});
             }
