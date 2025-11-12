@@ -10,6 +10,11 @@ import { Toaster } from "../components/ui/sonner.js";
 import { Provider } from "react-redux";
 import store from "./redux/store.js";
 
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from "redux-persist";
+
+let persistor = persistStore(store);
+
 const mainRoot = ReactDOM.createRoot(document.getElementById("root"));
 
 //Routing configguration
@@ -36,8 +41,10 @@ const App = () => {
     return (
         <div>
             <Provider store={store}>
-                <Toaster position="top-center" richColors />
-                <RouterProvider router={routerConfig} />
+                <PersistGate loading={null} persistor={persistor}>
+                    <Toaster position="top-center" richColors />
+                    <RouterProvider router={routerConfig} />
+                </PersistGate>
             </Provider>
         </div>
     );
