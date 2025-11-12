@@ -40,7 +40,7 @@ const getAllExpenses = async (req, res) => {
     {
         const userId = req.id;
         const category = req.query.category ? req.query.category  : "all";
-        const done = req.query.done ? req.query.done : "";
+        const done = req.query.done != "all" ? req.query.done : "all";
 
         const query = {userId}
 

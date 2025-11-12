@@ -22,7 +22,7 @@ const Home = () => {
   }
 
   const doneHandler = (value) => {
-
+    
     dispatch(setSliceMarkAsDone(value));
 
   }
@@ -57,8 +57,8 @@ const Home = () => {
           <SelectTrigger><SelectValue placeholder="Mark As" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="done">Done</SelectItem>
-            <SelectItem value="not done">Not Done</SelectItem>
-            <SelectItem value="both">both</SelectItem>
+            <SelectItem value="undone">Not Done</SelectItem>
+            <SelectItem value="all">both</SelectItem>
           </SelectContent>
         </Select>
 

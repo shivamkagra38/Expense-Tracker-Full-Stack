@@ -6,11 +6,16 @@ import { Link, useNavigate } from 'react-router';
 import { Button } from './ui/button.js';
 import axios from 'axios';
 import { toast } from 'sonner';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
 
-    const[user, setUser] = useState(true);
+   // const[user, setUser] = useState(false);
     const navigate = useNavigate();
+
+    const user = useSelector((store)=>{return store.auth});
+
+    console.log(user);
 
     const logoutHandler = async () => {
 
@@ -42,7 +47,7 @@ const Navbar = () => {
 
         <Logo />
         {
-            user ?
+            user.user ?
             (
                 <Popover>
                     <PopoverTrigger>

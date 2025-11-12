@@ -6,7 +6,7 @@ const expenseSlice = createSlice({
     initialState:{
 
         category:"",
-        markAsDone:"",
+        markAsDone:"all",
         expenses:[]
 
     },

@@ -6,12 +6,15 @@ import { Button } from './ui/button';
 import Logo from './Logo.js';
 import { Link, useNavigate } from 'react-router';
 import axios from 'axios';
-import { toast } from "sonner"
+import { toast } from "sonner";
+import { useDispatch } from 'react-redux';
+import { setAuthUser } from "../src/redux/authSlice.js";
 
 const Login = () => {
 
     const [userData, setUserData] = useState({email:"", password:""});
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     //Handling user input
     const inputHandler = (e) => {
@@ -41,9 +44,10 @@ const Login = () => {
               withCredentials: true
 
             });
+
+            dispatch( setAuthUser(response.data.user) );
             toast.success('Welcome, Redirecting you to home screen...');
             navigate("/");
-            console.log(response);
 
         }
         catch(error)

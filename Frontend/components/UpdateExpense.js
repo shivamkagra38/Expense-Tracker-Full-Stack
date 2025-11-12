@@ -5,10 +5,17 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Label } from './ui/label.js';
 import { Input } from './ui/input.js';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select.js";
+import axios from 'axios';
+import { toast } from 'sonner';
+import { useDispatch, useSelector } from 'react-redux';
+import { setExpenses } from '../src/redux/expenseSlice.js';
 
 const UpdateExpense = (props) => {
 
-  const[updateForm, setUpdateForm] = useState({description:"", amount:"", category:""});
+  const[updateForm, setUpdateForm] = useState({description:props.expense.description, amount:props.expense.amount, category:props.expense.category});
+  const dispatch = useDispatch();
+
+  const allExpenses = useSelector( (store) => {return store.expense} ).expenses;
 
   const handleInput = (e) => {
 
@@ -18,6 +25,31 @@ const UpdateExpense = (props) => {
 
   const categoryHandler = (e) => {
     setUpdateForm({...updateForm, category:e});
+  }
+
+  const updateHandler = async (e) => {
+
+    e.preventDefault();
+
+    try
+    {
+      const res = await axios.put(`http://localhost:8000/update-expense/${props.expense._id}`,updateForm,{withCredentials:true});
+      toast.success("Update Successful !");
+
+      const filterArr = allExpenses.map((e)=>{
+
+        return e._id == props.expense._id ? res.data.updateExpenseStatus : e;
+
+      });
+
+      dispatch(setExpenses(filterArr));
+
+    }
+    catch(error)
+    {
+      console.log(error);
+    }
+
   }
 
   return (
@@ -34,7 +66,7 @@ const UpdateExpense = (props) => {
           <DialogTitle>Update Expense</DialogTitle>
         </DialogHeader>
 
-        <form>
+        <form onSubmit={updateHandler}>
 
           <div className="mb-3">
             <Label className="mb-1.5">Description</Label>
@@ -65,11 +97,14 @@ const UpdateExpense = (props) => {
             </Select>
           </div>
 
-        </form>
+          <DialogFooter>
+            
+            <Button type="submit" className="bg-blue-600 hover:bg-white hover:text-blue-600 hover:border hover:border-blue-600">Done !</Button>
+          
+          </DialogFooter>
 
-        <DialogFooter>
-          <Button type="submit" className="bg-blue-600 hover:bg-white hover:text-blue-600 hover:border hover:border-blue-600">Done !</Button>
-        </DialogFooter>
+          </form>
+
 
       </DialogContent>
 
