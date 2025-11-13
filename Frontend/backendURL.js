@@ -1,3 +1,3 @@
-const backendURL = "https://expense-tracker-backend-gaq2.onrender.com";
+const backendURL = "https://expense-tracker-back-3nz0.onrender.com";
 
 export default backendURL;
