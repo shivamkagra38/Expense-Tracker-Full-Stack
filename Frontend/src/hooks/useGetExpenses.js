@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setExpenses } from "../redux/expenseSlice.js";
+import backendURL from "../../backendURL.js";
 
 const useGetExpenses = () => {
 
@@ -14,7 +15,7 @@ const useGetExpenses = () => {
 
             try
             {
-                const response = await axios.post(`http://localhost:8000/get-all-expenses?category=${category}&done=${markAsDone}`,{},{
+                const response = await axios.post(`${backendURL}/get-all-expenses?category=${category}&done=${markAsDone}`,{},{
                     withCredentials: true
                 });
                 

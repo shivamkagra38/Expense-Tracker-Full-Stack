@@ -9,6 +9,7 @@ import axios from 'axios';
 import { toast } from "sonner";
 import { useDispatch } from 'react-redux';
 import { setAuthUser } from "../src/redux/authSlice.js";
+import backendURL from "../backendURL.js";
 
 const Login = () => {
 
@@ -38,7 +39,7 @@ const Login = () => {
             }
 
             toast.info('Logging you in...');
-            const response = await axios.post("http://localhost:8000/login",userData, {
+            const response = await axios.post(`${backendURL}/login`,userData, {
 
               headers: {"Content-Type":"application/json"},
               withCredentials: true

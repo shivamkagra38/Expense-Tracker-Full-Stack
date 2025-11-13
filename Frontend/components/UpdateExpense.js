@@ -9,6 +9,7 @@ import axios from 'axios';
 import { toast } from 'sonner';
 import { useDispatch, useSelector } from 'react-redux';
 import { setExpenses } from '../src/redux/expenseSlice.js';
+import backendURL from "../backendURL.js";
 
 const UpdateExpense = (props) => {
 
@@ -33,7 +34,7 @@ const UpdateExpense = (props) => {
 
     try
     {
-      const res = await axios.put(`http://localhost:8000/update-expense/${props.expense._id}`,updateForm,{withCredentials:true});
+      const res = await axios.put(`${backendURL}/update-expense/${props.expense._id}`,updateForm,{withCredentials:true});
       toast.success("Update Successful !");
 
       const filterArr = allExpenses.map((e)=>{

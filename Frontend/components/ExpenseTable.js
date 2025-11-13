@@ -9,6 +9,7 @@ import axios from 'axios';
 import { toast } from 'sonner';
 import { setExpenses } from "../src/redux/expenseSlice.js";
 import UpdateExpense from './UpdateExpense.js';
+import backendURL from "../backendURL.js";
 
 const ExpenseTable = () => {
 
@@ -21,7 +22,7 @@ const ExpenseTable = () => {
 
         try
         {
-            const res = await axios.put(`http://localhost:8000/mark-as-done/${exp._id}`,{done:newState},{withCredentials:true});
+            const res = await axios.put(`${backendURL}/mark-as-done/${exp._id}`,{done:newState},{withCredentials:true});
 
             dispatch(setExpenses( expenses.map((expense)=>{
 
@@ -42,7 +43,7 @@ const ExpenseTable = () => {
 
         try
         {
-            const res = await axios.delete(`http://localhost:8000/remove-expense/${e._id}`,{ withCredentials: true});
+            const res = await axios.delete(`${backendURL}/remove-expense/${e._id}`,{ withCredentials: true});
 
             console.log(res.data);
 

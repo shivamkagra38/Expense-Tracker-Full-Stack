@@ -6,7 +6,10 @@ import { Link, useNavigate } from 'react-router';
 import { Button } from './ui/button.js';
 import axios from 'axios';
 import { toast } from 'sonner';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setExpenses } from "../src/redux/expenseSlice.js";
+import { setAuthUser } from '../src/redux/authSlice';
+import backendURL from "../backendURL.js";
 
 const Navbar = () => {
 
@@ -14,15 +17,14 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const user = useSelector((store)=>{return store.auth});
-
-    console.log(user);
+    const dispatch = useDispatch();
 
     const logoutHandler = async () => {
 
         try
         {
             //Network call...
-            const response = await axios.get("http://localhost:8000/logout", {
+            const response = await axios.get(`${backendURL}/logout`, {
                 withCredentials: true
             });
 
@@ -30,6 +32,8 @@ const Navbar = () => {
             {
                 console.log("Logged out");
                 toast.success("Logged out successfully");
+                dispatch(setExpenses([]));
+                dispatch(setAuthUser(null));
                 navigate("/login");
             }
         }

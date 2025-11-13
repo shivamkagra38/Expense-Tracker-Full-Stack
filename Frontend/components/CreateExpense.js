@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setExpenses } from "../src/redux/expenseSlice.js";
+import backendURL from "../backendURL.js";
 
 const CreateExpense = (props) => {
 
@@ -44,7 +45,7 @@ const CreateExpense = (props) => {
 
         try
         {
-            const response = await axios.post("http://localhost:8000/add-expense",formData,{withCredentials: true});
+            const response = await axios.post(`${backendURL}/add-expense`,formData,{withCredentials: true});
     
             if(response.data.success)
             {

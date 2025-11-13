@@ -6,6 +6,7 @@ import { Button } from './ui/button';
 import Logo from './Logo.js';
 import { Link } from 'react-router';
 import axios from 'axios';
+import backendURL from "../backendURL.js";
 
 const Signup = () => {
 
@@ -35,7 +36,7 @@ const Signup = () => {
 
             setMessage("Processing your request...");
 
-            const response = await axios.post("http://localhost:8000/register",userData);
+            const response = await axios.post(`${backendURL}/register`,userData);
 
             console.log(response);
             setMessage("Welcome to the team ✅");
