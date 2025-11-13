@@ -17,7 +17,8 @@ dotevn.config({});
 console.log(`\nBackend written in Node.js by ${process.env.DEVELOPER}\n`);
 
 //Setting up listening port
-var PORT = 8000;
+var PORT = process.env.PORT || 8000;
+
 app.listen(PORT, () => {
 
     connectDB();
