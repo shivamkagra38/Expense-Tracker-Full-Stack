@@ -28,7 +28,7 @@ app.listen(PORT, () => {
 
 app.use(express.json());//Middleware for json parsing
 app.use(express.urlencoded({extended:true}));// Middleware for parsing form data
-app.use(CORS({origin:"https://expense-tracker-full-stack-by-shivam.netlify.app",credentials: true}));//Middleware for avoiding CORS policy error
+app.use(CORS({origin:"https://expense-tracker-full-stack-by-shivam.netlify.app/",credentials: true}));//Middleware for avoiding CORS policy error
 app.use(cookieParser());
 
 app.post("/register", registerUser);
