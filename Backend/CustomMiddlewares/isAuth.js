@@ -5,7 +5,7 @@ const isAuth = async(req, res, next) => {
     try
     {
         const token = req.cookies.token;
-        //console.log(token);
+        console.log(req.cookies);
         
         if(!token)
         {
