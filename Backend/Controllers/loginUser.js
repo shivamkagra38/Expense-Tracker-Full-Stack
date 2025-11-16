@@ -46,7 +46,7 @@ const loginUser = async (req, res) => {
         const token = await jwt.sign(tokenData, process.env.SECRET_KEY, {expiresIn: "1d"});
         
         res.status(200)
-        .cookie("token", token, {maxAge:1*24*60*60*1000, httpOnly:true, sameSite:"strict"})
+        .cookie("token", token, {maxAge:1*24*60*60*1000, httpOnly:true, sameSite:"None"})
         .json({
             message:`Welcome ${userExists.fullname}`,
             user: {
