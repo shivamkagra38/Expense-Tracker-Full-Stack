@@ -3,7 +3,7 @@ const logoutUser = (req, res) => {
     try
     {
         res.status(200)
-        .cookie("token", null, {maxAge:0})
+        .cookie("token", null, {maxAge:0, httpOnly:true, sameSite:"None", secure:true})
         .json({
             message: "Logged out successfully",
             status:true

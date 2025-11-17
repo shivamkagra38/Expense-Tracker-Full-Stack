@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button } from './ui/button';
-import { Edit } from 'lucide-react';
+import { Edit, Loader2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog.js";
 import { Label } from './ui/label.js';
 import { Input } from './ui/input.js';
@@ -15,6 +15,8 @@ const UpdateExpense = (props) => {
 
   const[updateForm, setUpdateForm] = useState({description:props.expense.description, amount:props.expense.amount, category:props.expense.category});
   const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
 
   const allExpenses = useSelector( (store) => {return store.expense} ).expenses;
 
@@ -34,6 +36,7 @@ const UpdateExpense = (props) => {
 
     try
     {
+      setLoading(true);
       const res = await axios.put(`${backendURL}/update-expense/${props.expense._id}`,updateForm,{withCredentials:true});
       toast.success("Update Successful !");
 
@@ -49,6 +52,10 @@ const UpdateExpense = (props) => {
     catch(error)
     {
       console.log(error);
+    }
+    finally
+    {
+      setLoading(false);
     }
 
   }
@@ -100,7 +107,9 @@ const UpdateExpense = (props) => {
 
           <DialogFooter>
             
-            <Button type="submit" className="bg-blue-600 hover:bg-white hover:text-blue-600 hover:border hover:border-blue-600">Done !</Button>
+            <Button type="submit" className="bg-blue-600 hover:bg-white hover:text-blue-600 hover:border hover:border-blue-600">
+              {loading ? <Loader2 className="animate-spin"/> : "Update !"}
+            </Button>
           
           </DialogFooter>
 

@@ -26,9 +26,27 @@ app.listen(PORT, () => {
     
 });
 
+const allowedPoints = ["http://localhost:1234", "https://expense-tracker-full-stack-by-shivam.netlify.app"];
+const corsOptions = {
+
+    origin: (origin, callback) => {
+
+        if(allowedPoints.indexOf(origin) != -1)
+        {
+            callback(null,true);
+        }
+        else
+        {
+            callback(new Error("Blocked by CORS Policy"), false)
+        }
+
+    },
+    credentials: true
+}
+
 app.use(express.json());//Middleware for json parsing
 app.use(express.urlencoded({extended:true}));// Middleware for parsing form data
-app.use(CORS({origin:"https://expense-tracker-full-stack-by-shivam.netlify.app",credentials: true}));//Middleware for avoiding CORS policy error
+app.use( CORS(corsOptions) );//Middleware for avoiding CORS policy error
 app.use(cookieParser());
 
 app.post("/register", registerUser);
